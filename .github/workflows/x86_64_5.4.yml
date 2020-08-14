@@ -66,7 +66,7 @@ jobs:
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         cd openwrt
         sed -i '11s/#//' feeds.conf.default
-        sed '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
+        sed -i '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
         src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
         
         
