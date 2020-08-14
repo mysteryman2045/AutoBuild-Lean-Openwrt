@@ -67,7 +67,7 @@ jobs:
         cd openwrt
         sed -i '11s/#//' feeds.conf.default
         sed '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom' feeds.conf.default
-        sed '/infinityfreedom/a\src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
+        sed '/helloworld/a\src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
         
         
     - name: Update & Install feeds
