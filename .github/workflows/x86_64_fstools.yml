@@ -5,7 +5,7 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_x86_64_overlay
+name: Build_x86_64_fstools
 
 on: 
   release:
@@ -15,7 +15,7 @@ on:
     branches: 
       - master
     paths:
-      - 'x86_64_overlay.config'
+      - 'x86_64_fstools.config'
 
   #schedule:
   #  - cron: 0 8 * * 5
@@ -66,13 +66,13 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         
-    - name: Clone overlay
+    - name: Clone fstools
       env: 
-        REPO_URL: https://github.com/mysteryman2045/overlay
+        REPO_URL: https://github.com/mysteryman2045/fstools
         REPO_BRANCH: master
       run: |
-        git clone $REPO_URL $REPO_BRANCH
-        cp -f /overlay/fstools/Makefile /openwrt/package/system/fstools/
+        git clone $REPO_URL
+        cp -f fstools/fstools/Makefile openwrt/package/system/fstools/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -89,9 +89,9 @@ jobs:
     #    git clone https://github.com/Lienol/openwrt-package package/lienol
     #    git clone "your_github_link" package/"your_folder_name"      
 
-    - name: Configuration Customization - Build_x86_64_overlay
+    - name: Configuration Customization - Build_x86_64_fstools
       env:
-        CONFIG_FILE: 'x86_64_overlay.config'
+        CONFIG_FILE: 'x86_64_fstools.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         
@@ -109,10 +109,10 @@ jobs:
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
         
-    - name: overlay-Build firmware
+    - name: copy fstools---Build firmware
       working-directory: ./openwrt
       run: |
-        cp -rf /overlay/fstools-2020-07-11-53453438/* /openwrt/build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
+        cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s    
         
