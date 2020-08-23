@@ -61,7 +61,7 @@ jobs:
         
     - name: Clone overlay
       run: |
-        git clone https://github.com/mysteryman2045/AutoBuild-Lean-Openwrt/tree/master/overlay    
+        git clone https://github.com/mysteryman2045/AutoBuild-Lean-Openwrt/overlay    
         
     - name: Clone source code
       env: 
