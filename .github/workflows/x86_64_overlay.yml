@@ -59,25 +59,27 @@ jobs:
         sudo -E apt-get -y autoremove --purge
         sudo -E apt-get clean
         
-    - name: Clone overlay
-      run: |
-        git clone https://github.com/mysteryman2045/AutoBuild-Lean-Openwrt/overlay    
-        
     - name: Clone source code
       env: 
         REPO_URL: https://github.com/coolsnowwolf/lede
         REPO_BRANCH: master
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
-        cd openwrt
-        sed -i '11s/#//' feeds.conf.default
-        sed -i '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
-        src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
-        cp -f /overlay/fstools/Makefile /openwrt/package/system/fstools/    
+        
+    - name: Clone overlay
+      env: 
+        REPO_URL: https://github.com/mysteryman2045/overlay
+        REPO_BRANCH: master
+      run: |
+        git clone $REPO_URL $REPO_BRANCH
+        cp -f /overlay/fstools/Makefile /openwrt/package/system/fstools/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
+        sed -i '11s/#//' feeds.conf.default
+        sed -i '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
+        src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
