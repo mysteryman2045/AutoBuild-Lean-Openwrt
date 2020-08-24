@@ -103,18 +103,14 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
+        make package/system/fstools/download
+        make package/system/fstools/prepare
+        cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
     - name: Build firmware
       working-directory: ./openwrt
       run: |
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
-        
-    - name: copy fstools---Build firmware
-      working-directory: ./openwrt
-      run: |
-        cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
-        echo -e "$(nproc) thread build."
-        make -j$(nproc) V=s    
         
     - name : Upload artifact
       uses: actions/upload-artifact@master
