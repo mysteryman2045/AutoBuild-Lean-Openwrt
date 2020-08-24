@@ -4,6 +4,8 @@ Action的.yml参考了esir的，进行了个人需求的修改。
 
 esir's github : https://github.com/esirplayground/AutoBuild-OpenWrt
 
+----------------------------------------------------------------------
+
 
 另外参考liuqi_colin@msn.com的两个修复自定义overlay挂载问题的patch，实现Actions上编译出可成功挂载自定义overlay的固件包。
 
@@ -12,7 +14,7 @@ liuqi's patch about fstools :
 https://patchwork.ozlabs.org/project/openwrt/patch/BYAPR03MB444052C4846ECA6DB88B098D955E0@BYAPR03MB4440.namprd03.prod.outlook.com/
 https://patchwork.ozlabs.org/project/openwrt/patch/BYAPR03MB4440353BF13FCB2C80389186955E0@BYAPR03MB4440.namprd03.prod.outlook.com/
 
-
+----------------------------------------------------------------------
 
 在自己本地将package/system/fstools下的Makefile按照openwrt官方的2020-07-11版本修改HASH，DATE，VERSION。
 
@@ -41,7 +43,7 @@ build_dir/target-x86_64_musl/fstools-2020-07-11-53453438
 
 再次执行一次编译，完成后即可获得overlay可自定义挂载的固件包了。
 
-获取到修改后的文件，上传到github，就可以通过Actions过程中自动替换修改后的文件，实现编译出可成功挂载自定义overlay的固件包。
+获取到修改后的文件，上传到github，就可以通过Actions过程中自动替换修改后的代码文件，实现编译出可成功挂载自定义overlay的固件包。
 
 
 ----------------------------------------------------------------------
@@ -57,3 +59,5 @@ package/system/fstools
 build_dir/target-x86_64_musl/fstools-2020-07-11-53453438
 
 然后用修改后的文件覆盖，结果编译出的固件包仍然是无法自定义挂载overlay的。
+
+具体原因，还在摸索，有清楚的git友，还望不吝赐教。谢谢！
