@@ -1,4 +1,4 @@
-# AutoBuild-Lean'sOpenwrt
+# AutoBuild - Lean's Openwrt
 
 Action的.yml参考了esir的，进行了个人需求的修改。
 
