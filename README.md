@@ -1,11 +1,11 @@
 # AutoBuild-Lean'sOpenwrt
 
-Action的.yml参考了esir的，再次进行了个人定制化，制定.config文件更改后触发Actions。
+Action的.yml参考了esir的，进行了个人需求的修改。
 
 esir's github : https://github.com/esirplayground/AutoBuild-OpenWrt
 
 
-另外参考liuqi_colin@msn.com的两个修复自定义overlay挂载问题的patch，实现Actions上直接打出可成功挂载自定义overlay的固件包。
+另外参考liuqi_colin@msn.com的两个修复自定义overlay挂载问题的patch，实现Actions上编译出可成功挂载自定义overlay的固件包。
 
 liuqi's patch about fstools :
 
@@ -21,4 +21,4 @@ https://patchwork.ozlabs.org/project/openwrt/patch/BYAPR03MB4440353BF13FCB2C8038
 
 由于fstools这两处的patch均无历史patch，所以可以按照patch内容直接修改对应文件。
 
-获取到修改后的文件，上传到github，就可以通过Actions实现直接打出可成功挂载自定义overlay的固件包。
+获取到修改后的文件，上传到github，就可以通过Actions过程中替换文件，实现编译出可成功挂载自定义overlay的固件包。
