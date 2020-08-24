@@ -37,4 +37,4 @@ CMAKE_INSTALL:=1
 
 由于fstools这两处的patch均无历史patch，所以可以按照patch内容直接修改对应文件。
 
-获取到修改后的文件，上传到github，就可以通过Actions过程中替换文件，实现编译出可成功挂载自定义overlay的固件包。
+获取到修改后的文件，上传到github，就可以通过Actions过程中自动替换修改后的文件，实现编译出可成功挂载自定义overlay的固件包。
