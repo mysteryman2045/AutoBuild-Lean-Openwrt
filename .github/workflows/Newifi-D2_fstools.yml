@@ -112,7 +112,7 @@ jobs:
     - name: copy fstools---Build firmware
       working-directory: ./openwrt
       run: |
-        cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
+        cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-mipsel_24kc_musl/fstools-2020-07-11-53453438/
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s    
         
