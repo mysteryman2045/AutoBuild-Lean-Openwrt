@@ -119,5 +119,5 @@ jobs:
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: OpenWrt_x86_64
+        name: OpenWrt_x86_64${{ env.FILE_DATE }}
         path: openwrt/bin/targets
