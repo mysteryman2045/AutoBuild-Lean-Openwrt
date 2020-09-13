@@ -80,7 +80,7 @@ jobs:
         REPO_BRANCH: master
       run: |
         git clone $REPO_URL
-        cp -rf luci-app-adguardhome openwrt/package/lean
+        cp -rf luci-app-adguardhome/ openwrt/package/lean/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
