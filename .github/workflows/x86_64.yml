@@ -5,7 +5,7 @@
 # Youtube Channel: https://goo.gl/fvkdwm 
 #=================================================
 
-name: Build_x86_64_fstools_test
+name: Build_x86_64
 
 on: 
   release:
@@ -15,7 +15,7 @@ on:
     branches: 
       - master
     paths:
-      - 'x86_64_fstools_test.config'
+      - 'x86_64.config'
 
   #schedule:
   #  - cron: 0 8 * * 5
@@ -55,7 +55,7 @@ jobs:
           mysql* \
           php*
         sudo -E apt-get update
-        sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev patch unzip lib32gcc1 libc6-dev-i386 subversion flex node-uglify gcc-multilib g++-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils  libelf-dev autoconf automake libtool autopoint device-tree-compiler libuv-dev python3.6 zlib1g-dev upx-ucl node-uglify antlr3 gperf wget swig rsync
+        sudo -E apt-get -y install build-essential asciidoc binutils bzip2 gawk gettext git libncurses5-dev libz-dev patch python3 python2.7 unzip zlib1g-dev lib32gcc1 libc6-dev-i386 subversion flex uglifyjs git-core gcc-multilib p7zip p7zip-full msmtp libssl-dev texinfo libglib2.0-dev xmlto qemu-utils upx libelf-dev autoconf automake libtool autopoint device-tree-compiler g++-multilib antlr3 gperf wget curl swig rsync
         sudo -E apt-get -y autoremove --purge
         sudo -E apt-get clean
         
@@ -66,13 +66,21 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         
-    - name: Clone fstools
+    #- name: Clone fstools
+    #  env: 
+    #    REPO_URL: https://github.com/mysteryman2045/fstools
+    #    REPO_BRANCH: master
+    #  run: |
+    #    git clone $REPO_URL
+    #    cp -f fstools/fstools/Makefile openwrt/package/system/fstools/
+        
+    - name: Clone AdGuardHome
       env: 
-        REPO_URL: https://github.com/mysteryman2045/fstools
+        REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
         REPO_BRANCH: master
       run: |
         git clone $REPO_URL
-        cp -f fstools/fstools/Makefile openwrt/package/system/fstools/
+        cp -rf luci-app-adguardhome/ openwrt/package/lean/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -89,9 +97,9 @@ jobs:
     #    git clone https://github.com/Lienol/openwrt-package package/lienol
     #    git clone "your_github_link" package/"your_folder_name"      
 
-    - name: Configuration Customization - Build_x86_64_fstools_test
+    - name: Configuration Customization - Build_x86_64
       env:
-        CONFIG_FILE: 'x86_64_fstools_test.config'
+        CONFIG_FILE: 'x86_64.config'
       run: |
         [ -e $CONFIG_FILE ] && mv $CONFIG_FILE openwrt/.config
         
@@ -103,17 +111,21 @@ jobs:
         make download -j$(nproc)
         find dl -size -1024c -exec ls -l {} \;
         find dl -size -1024c -exec rm -f {} \;
-        
     - name: Build firmware
       working-directory: ./openwrt
       run: |
-        make package/system/fstools/{download,prepare} V=s
-        cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
         echo -e "$(nproc) thread build."
         make -j$(nproc) V=s
+        
+    #- name: copy fstools---Build firmware
+    #  working-directory: ./openwrt
+    #  run: |
+    #    cp -rf ../fstools/fstools-2020-07-11-53453438/* build_dir/target-x86_64_musl/fstools-2020-07-11-53453438/
+    #    echo -e "$(nproc) thread build."
+    #    make -j$(nproc) V=s    
         
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: OpenWrt
+        name: OpenWrt_x86_64${{ env.FILE_DATE }}
         path: openwrt/bin/targets
