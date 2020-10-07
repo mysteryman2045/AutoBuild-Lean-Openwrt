@@ -74,13 +74,13 @@ jobs:
     #    git clone $REPO_URL
     #    cp -f fstools/fstools/Makefile openwrt/package/system/fstools/
         
-    - name: Clone AdGuardHome
-      env: 
-        REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
-        REPO_BRANCH: master
-      run: |
-        git clone $REPO_URL
-        cp -rf luci-app-adguardhome/ openwrt/package/lean/
+    #- name: Clone AdGuardHome
+    #  env: 
+    #    REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
+    #    REPO_BRANCH: master
+    #  run: |
+    #    git clone $REPO_URL
+    #    cp -rf luci-app-adguardhome/ openwrt/package/lean/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
@@ -127,5 +127,5 @@ jobs:
     - name : Upload artifact
       uses: actions/upload-artifact@master
       with:
-        name: OpenWrt_x86_64${{ env.FILE_DATE }}
+        name: OpenWrt_x86_64
         path: openwrt/bin/targets
