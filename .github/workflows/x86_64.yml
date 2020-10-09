@@ -74,20 +74,19 @@ jobs:
     #    git clone $REPO_URL
     #    cp -f fstools/fstools/Makefile openwrt/package/system/fstools/
         
-    #- name: Clone AdGuardHome
-    #  env: 
-    #    REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
-    #    REPO_BRANCH: master
-    #  run: |
-    #    git clone $REPO_URL
-    #    cp -rf luci-app-adguardhome/ openwrt/package/lean/
+    - name: Clone AdGuardHome
+      env: 
+        REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
+        REPO_BRANCH: master
+      run: |
+        git clone $REPO_URL
+        cp -rf luci-app-adguardhome/ openwrt/package/lean/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
       run: |
         sed -i '11s/#//' feeds.conf.default
-        sed -i '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
-        src-git dockerman https://github.com/lisaac/luci-app-dockerman' feeds.conf.default
+        sed -i '/helloworld/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom' feeds.conf.default
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
