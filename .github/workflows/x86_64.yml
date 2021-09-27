@@ -86,7 +86,9 @@ jobs:
       working-directory: ./openwrt
       run: |
         sed -i '/custom-feed/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
-        src-git helloworld https://github.com/fw876/helloworld' feeds.conf.default
+        src-git helloworld https://github.com/fw876/helloworld\
+        src-git NetSpeedTest https://github.com/sirpdboy/NetSpeedTest' feeds.conf.default
+        ./scripts/feeds update -a
         ./scripts/feeds update -a
         ./scripts/feeds install -a
         ./scripts/feeds install -a
