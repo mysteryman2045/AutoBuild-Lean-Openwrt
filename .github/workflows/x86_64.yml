@@ -66,13 +66,7 @@ jobs:
       run: |
         git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
         
-    #- name: Clone fstools
-    #  env: 
-    #    REPO_URL: https://github.com/mysteryman2045/fstools
-    #    REPO_BRANCH: master
-    #  run: |
-    #    git clone $REPO_URL
-    #    cp -f fstools/fstools/Makefile openwrt/package/system/fstools/
+    
         
     - name: Clone AdGuardHome
       env: 
@@ -81,6 +75,14 @@ jobs:
       run: |
         git clone $REPO_URL
         cp -rf luci-app-adguardhome/ openwrt/package/lean/
+        
+    - name: Clone netdata
+      env: 
+        REPO_URL: https://github.com/sirpdboy/luci-app-netdata
+        REPO_BRANCH: master
+      run: |
+        git clone $REPO_URL
+        cp -rf luci-app-netdata/ openwrt/package/lean/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
