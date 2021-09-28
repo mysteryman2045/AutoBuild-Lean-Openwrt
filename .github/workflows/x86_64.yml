@@ -93,8 +93,6 @@ jobs:
         ./scripts/feeds install -a
         ./scripts/feeds install -a
         ./scripts/feeds update NetSpeedTest
-        ./scripts/feeds update NetSpeedTest
-        ./scripts/feeds install luci-app-netspeedtest
         ./scripts/feeds install luci-app-netspeedtest
     #- name: Import external feeds
     #  working-directory: ./openwrt
