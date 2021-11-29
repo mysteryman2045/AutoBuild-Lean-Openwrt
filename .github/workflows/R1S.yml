@@ -29,8 +29,9 @@ jobs:
 
     steps:
     - name: Checkout
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
       with:
+        ref: master
         fetch-depth: 0
     - name: cache
       uses: mysteryman2045/cachewrtbuild@main
