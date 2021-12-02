@@ -65,13 +65,13 @@ jobs:
         git clone $REPO_URL
         cp -rf luci-app-adguardhome/ openwrt/package/lean/
         
-    - name: Clone netdata
-      env: 
-        REPO_URL: https://github.com/sirpdboy/luci-app-netdata
-        REPO_BRANCH: master
-      run: |
-        git clone $REPO_URL
-        cp -rf luci-app-netdata/ openwrt/package/lean/
+    #- name: Clone netdata
+      #env: 
+        #REPO_URL: https://github.com/sirpdboy/luci-app-netdata
+        #REPO_BRANCH: master
+      #run: |
+        #git clone $REPO_URL
+        #cp -rf luci-app-netdata/ openwrt/package/lean/
         
     - name: Update & Install feeds
       working-directory: ./openwrt
