@@ -45,7 +45,6 @@ jobs:
           azure-cli \
           ghc* \
           zulu* \
-          hhvm \
           llvm* \
           firefox \
           google* \
