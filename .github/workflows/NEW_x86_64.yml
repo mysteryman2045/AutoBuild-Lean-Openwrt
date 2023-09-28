@@ -56,9 +56,7 @@ jobs:
         working-directory: ./openwrt
         run: |
           sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
-          sed -i '/custom-feed/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
-          src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git\
-          src-git passwall https://github.com/xiaorouji/openwrt-passwall.git' ./feeds.conf.default
+          sed -i '/custom-feed/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
