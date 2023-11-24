@@ -43,7 +43,7 @@ jobs:
          REPO_BRANCH: master
         run: |
          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
-         rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
+         
 
       #- name: Clone AdGuardHome
         #env: 
@@ -61,6 +61,7 @@ jobs:
           src-git smpackage https://github.com/kenzok8/small-package' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
+          rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
 
       - name: Configuration Customization - Build_smpackage
         env:
