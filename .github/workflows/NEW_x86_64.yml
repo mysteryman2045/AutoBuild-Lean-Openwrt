@@ -44,20 +44,22 @@ jobs:
         run: |
          git clone --depth 1 $REPO_URL -b $REPO_BRANCH openwrt
 
-      #- name: Clone AdGuardHome
-        #env: 
-         #REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
-         #REPO_BRANCH: master
-        #run: |
-         #git clone $REPO_URL
-         #cp -rf luci-app-adguardhome/ openwrt/package/lean/
+      - name: Clone AdGuardHome
+        env: 
+         REPO_URL: https://github.com/kongfl888/luci-app-adguardhome
+         REPO_BRANCH: master
+        run: |
+         git clone $REPO_URL
+         cp -rf luci-app-adguardhome/ openwrt/package/lean/
 
       - name: Update feeds
         working-directory: ./openwrt
         run: |
           
           sed -i '/custom-feed/a\src-git infinityfreedom https://github.com/xiaoqingfengATGH/luci-theme-infinityfreedom\
-          src-git openclash https://github.com/vernesong/OpenClash.git' ./feeds.conf.default
+          src-git openclash https://github.com/vernesong/OpenClash.git\
+          src-git passwall https://github.com/xiaorouji/openwrt-passwall.git\
+          src-git passwall_packages https://github.com/xiaorouji/openwrt-passwall-packages.git' ./feeds.conf.default
           ./scripts/feeds update -a
           ./scripts/feeds install -a
 
